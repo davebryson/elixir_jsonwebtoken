@@ -37,3 +37,5 @@ token = JWT.sign("HS256",%{sub: "dave"}, secret)
 {:ok, payload} = JWT.verify("HS256",token,secret)
 
 ```
+
+This library was inspired by jwt-elixir: https://github.com/onkel-dirtus/jwt-elixir
