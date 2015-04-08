@@ -14,7 +14,9 @@ defmodule ElixirJsonwebtoken.Mixfile do
 
   defp deps do
     [
-      {:jazz, git: "https://github.com/meh/jazz.git"}
+      {:jazz, git: "https://github.com/meh/jazz.git"},
+      {:timex, git: "https://github.com/bitwalker/timex.git", tag: "0.13.4"},
+      {:milliseconds, git: "https://github.com/davebryson/elixir_milliseconds.git"}
     ]
   end
 
