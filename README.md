@@ -3,7 +3,7 @@ Jsonwebtoken (JWT)
 Simple API for signing and verifying JSON Web Tokens.
 
 Supports the following algorithms: HS256, HS384, HS512, RS256, RS384, RS512. 
-We don't support the 'none' algorithm. And you only get the payload if the token verifies.
+We don't support the 'none' algorithm, and you only get the payload if the token verifies.
 
 Examples
 --------
