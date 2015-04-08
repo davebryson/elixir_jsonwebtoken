@@ -89,13 +89,9 @@ defmodule Jsonwebtoken do
         end
     end
 
-    def is_expired?(%{"exp" => exp_value, "iat" => iat_value}) do
-        exp_value >= iat_value
-    end
-    def is_expired?(_) do
-        # No expired claim set 
-        false
-    end
+    # Pattern match on payload checking for expirations
+    defp is_expired?(%{"exp" => exp_value, "iat" => iat_value}), do: exp_value >= iat_value
+    defp is_expired?(_), do: false
 
     ### Internal helpers below ###
 
@@ -121,9 +117,8 @@ defmodule Jsonwebtoken do
         :public_key.der_decode(keyType, key0) 
     end
     # Should be an RSA Public key
-    defp extract_public_key(rsa_pem) do
-        :public_key.pem_entry_decode(rsa_pem) 
-    end
+    defp extract_public_key(rsa_pem), do: :public_key.pem_entry_decode(rsa_pem) 
+
 
     # JSON encode it and BaseUrl64 it
     defp to_json_and_encode(value) do
@@ -171,7 +166,6 @@ defmodule Jsonwebtoken do
         case rem(String.length(string), 4) do
             0 -> string
             _ -> pad(string <> "=")
+        end
     end
-
-end
 end
