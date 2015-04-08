@@ -68,8 +68,9 @@ defmodule Jsonwebtoken do
     @doc """
         Verify the token using either the HMAC secret or RSA KEY.
         Note, you only get the payload if it verifies.
+
         returns {:ok, payload} | {:warn, payload} | {:error, message}
-        where payload is Map. :warn is returned if the token expired
+          where payload is Map. :warn is returned if the token expired
     """
     def verify(alg, token, secret_or_pubkey) do
         [header,payload,signature] = String.split(token,".")

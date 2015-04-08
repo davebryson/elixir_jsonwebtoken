@@ -95,6 +95,6 @@ defmodule JwtTest do
     secret = "this is a secret"
     payload = JWT.expire_payload(%{sub: "dave"},"0")
     token = JWT.sign(alg,payload, secret)
-    {:warn, payload} = JWT.verify(alg,token,secret) 
+    {:warn, _payload} = JWT.verify(alg,token,secret) 
   end
 end
