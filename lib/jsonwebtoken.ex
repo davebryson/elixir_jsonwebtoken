@@ -133,7 +133,8 @@ defmodule Jsonwebtoken do
     end
 
     defp seconds_since_epoch do
-        Date.convert(Date.now, :secs) 
+        {mega, sec, _ } = :erlang.now
+        mega * 1000000 + sec
     end
 
     # THIS CODE WAS ADAPTED FROM THE JWT-ELIXIR WORK:
