@@ -36,6 +36,11 @@ secret = "this is a secret"
 token = JWT.sign("HS256",%{sub: "dave"}, secret)
 {:ok, payload} = JWT.verify("HS256",token,secret)
 
+# Create a token that expires in 30 days
+
+payload = JWT.expire_payload(%{sub: "dave"}, "30days")
+token = JWT.sign(alg, payload, secret)
+
 ```
 
 This library was inspired by jwt-elixir: https://github.com/onkel-dirtus/jwt-elixir
