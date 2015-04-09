@@ -97,4 +97,21 @@ defmodule JwtTest do
     token = JWT.sign(alg,payload, secret)
     {:warn, _payload} = JWT.verify(alg,token,secret) 
   end
+
+  test "sign password protected private keys" do
+    alg = "RS512"
+    pw = "changeme_password"
+    filename = Path.join(__DIR__, "ex1-password-priv-key.pem")
+    public_key = File.read!(Path.join(__DIR__, "ex1-pub-cert.pem"))
+
+    {:ok, token} = JWT.Openssl.sign_with_rsa_key(alg, %{sub: "dave"}, filename, pw)
+    {:ok, payload} = JWT.verify(alg,token,public_key)
+
+    assert "dave" == payload["sub"]
+  end
+
+  test "fails on bad filename" do 
+    filename = Path.join(__DIR__, "nope.pem")
+    catch_error JWT.Openssl.sign_with_rsa_key("RS512", %{sub: "dave"}, filename, "dontmatter")
+  end
 end

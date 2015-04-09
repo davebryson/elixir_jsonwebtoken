@@ -41,6 +41,11 @@ token = JWT.sign("HS256",%{sub: "dave"}, secret)
 payload = JWT.expire_payload(%{sub: "dave"}, "30days")
 token = JWT.sign(alg, payload, secret)
 
+# Sign a token with a password protected RSA private key
+
+filename = Path.join(__DIR__, "my-rsa-priv-key.pem")
+{:ok, token} = JWT.Openssl.sign_with_rsa_key(alg, %{sub: "dave"}, filename, "mysecretpassword")
+
 ```
 
 This library was inspired by jwt-elixir: https://github.com/onkel-dirtus/jwt-elixir
